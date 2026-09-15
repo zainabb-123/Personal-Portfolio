@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+<meta name="description" content="Portfolio of Your Name — developer & designer.">
+
+<!-- 
+  HOW TO CUSTOMIZE THIS FILE:
+  1. Search for "YOUR NAME", "YOUR TITLE", "YOUR EMAIL" and replace with your info.
+  2. Edit the <!-- PROJECT --> blocks inside #work to add your own projects.
+  3. Edit the <!-- SKILL --> list inside #skills.
+  4. Replace social links at the bottom of the page.
+  5. That's it — push this single file as index.html to your repo root,
+     then enable GitHub Pages (Settings → Pages → Deploy from branch → main / root).
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #10141f;
+    --ink-2: #171c29;
+    --paper: #f2efe9;
+    --paper-dim: #c9c4b8;
+    --slate: #8b93a6;
+    --brass: #c99b4a;
+    --brass-dim: #7a6136;
+    --line: #2a3040;
+    --max: 1100px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--brass); color: var(--ink); }
+
+  a{ color: inherit; }
+
+  h1, h2, h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.site-nav{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 50;
+    background: rgba(16,20,31,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px 32px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-mark{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--brass);
+  }
+  .nav-links{
+    display:flex;
+    gap: 28px;
+    list-style:none;
+    margin:0; padding:0;
+    font-size: 14px;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color: var(--slate);
+    transition: color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color: var(--paper); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--paper); font-size:22px; cursor:pointer; }
+
+  @media (max-width: 720px){
+    .nav-links{
+      position: absolute;
+      top: 100%; left:0; right:0;
+      background: var(--ink-2);
+      flex-direction: column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition: max-height .25s ease;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-links.open{ max-height: 260px; }
+    .nav-links li{ padding: 14px 32px; border-top: 1px solid var(--line); }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 200px 0 140px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--slate);
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: rise .7s ease forwards;
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: 1.05;
+    max-width: 16ch;
+    opacity: 0;
+    animation: rise .8s .1s ease forwards;
+  }
+  .hero h1 em{
+    font-style: italic;
+    color: var(--brass);
+  }
+  .hero p.lede{
+    margin-top: 26px;
+    max-width: 52ch;
+    font-size: 18px;
+    color: var(--paper-dim);
+    opacity: 0;
+    animation: rise .8s .22s ease forwards;
+  }
+  .hero-actions{
+    margin-top: 40px;
+    display:flex;
+    gap:18px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: rise .8s .32s ease forwards;
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-eyebrow, .hero h1, .hero p.lede, .hero-actions{ animation: none; opacity:1; }
+  }
+
+  .btn{
+    display:inline-block;
+    padding: 13px 26px;
+    border-radius: 2px;
+    font-size: 14px;
+    text-decoration:none;
+    border: 1px solid var(--line);
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .btn-primary{
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+    font-weight: 500;
+  }
+  .btn-primary:hover{ background: #dcae5e; }
+  .btn-ghost{ color: var(--paper); }
+  .btn-ghost:hover{ border-color: var(--paper-dim); }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 96px 0; border-bottom: 1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 48px;
+    gap: 20px;
+  }
+  .section-head h2{ font-size: 30px; }
+  .section-num{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--slate);
+    font-size: 13px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+  }
+  .about-grid p{ color: var(--paper-dim); max-width: 62ch; }
+  .about-grid p + p{ margin-top: 18px; }
+  .about-facts{ list-style:none; margin:0; padding:0; font-size:14px; }
+  .about-facts li{
+    display:flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    color: var(--slate);
+  }
+  .about-facts li span:last-child{ color: var(--paper); text-align:right; }
+
+  @media (max-width: 780px){
+    .about-grid{ grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ---------- Work: index/table style ---------- */
+  .project-row{
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    text-decoration:none;
+    color: inherit;
+    transition: padding-left .2s ease, color .2s ease;
+  }
+  .project-row:last-child{ border-bottom: 1px solid var(--line); }
+  .project-row:hover, .project-row:focus-visible{
+    padding-left: 10px;
+    color: var(--brass);
+  }
+  .project-num{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--slate);
+    font-size: 14px;
+  }
+  .project-title{ font-family:'Fraunces', serif; font-size: 22px; }
+  .project-title small{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--paper-dim);
+    margin-top: 6px;
+  }
+  .project-tags{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+  @media (max-width: 640px){
+    .project-row{ grid-template-columns: 32px 1fr; }
+    .project-tags{ grid-column: 2; margin-top: 4px; }
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-list{
+    columns: 2;
+    column-gap: 48px;
+    list-style: none;
+    margin:0; padding:0;
+  }
+  .skills-list li{
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--paper-dim);
+    break-inside: avoid;
+  }
+  @media (max-width: 560px){ .skills-list{ columns:1; } }
+
+  /* ---------- Contact ---------- */
+  .contact{ border-bottom:none; }
+  .contact h2{ font-size: clamp(2rem, 5vw, 3.2rem); max-width: 18ch; }
+  .contact-row{
+    margin-top: 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .contact-email{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 18px;
+    color: var(--brass);
+    text-decoration:none;
+    border-bottom: 1px solid var(--brass-dim);
+  }
+  .social-list{
+    display:flex;
+    gap: 22px;
+    list-style:none;
+    margin:0; padding:0;
+    font-size: 14px;
+  }
+  .social-list a{ text-decoration:none; color: var(--slate); }
+  .social-list a:hover{ color: var(--paper); }
+
+  footer{
+    padding: 28px 0 60px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--slate);
+  }
+
+  :focus-visible{ outline: 2px solid var(--brass); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">YN /</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero wrap">
+    <p class="hero-eyebrow">Portfolio — 2026</p>
+    <h1>I build things that live on the <em>web</em>, carefully.</h1>
+    <p class="lede">Your Name — I'm a developer & designer who cares about clean interfaces, fast code, and the small details most people skip. This site is a running index of what I've made.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="section-num">01</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a self-taught developer based in Pakistan, currently focused on front-end engineering and product design. I like projects where design and code aren't separate steps — where the interface is thought through from the first line.</p>
+        <p>Outside of client and personal work, I spend time reading about typography, contributing to small open-source tools, and rebuilding this very page whenever I learn something new.</p>
+      </div>
+      <ul class="about-facts">
+        <li><span>Based in</span><span>Lahore, Pakistan</span></li>
+        <li><span>Focus</span><span>Front-end & product design</span></li>
+        <li><span>Currently</span><span>Open to freelance work</span></li>
+        <li><span>Experience</span><span>3+ years</span></li>
+        <li><span>Tools</span><span>VS Code, Figma, Git</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section id="work" class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="section-num">02</span>
+    </div>
+
+    <!-- PROJECT -->
+    <a class="project-row" href="#" target="_blank" rel="noopener">
+      <span class="project-num">01</span>
+      <span class="project-title">Nimbus — Weather App
+        <small>A minimal weather app with location-based forecasts and offline caching.</small>
+      </span>
+      <span class="project-tags">React · API</span>
+    </a>
+
+    <!-- PROJECT -->
+    <a class="project-row" href="#" target="_blank" rel="noopener">
+      <span class="project-num">02</span>
+      <span class="project-title">Ledger — Expense Tracker
+        <small>A simple personal finance tracker with monthly breakdowns and CSV export.</small>
+      </span>
+      <span class="project-tags">JavaScript · Chart.js</span>
+    </a>
+
+    <!-- PROJECT -->
+    <a class="project-row" href="#" target="_blank" rel="noopener">
+      <span class="project-num">03</span>
+      <span class="project-title">Studio Portfolio Template
+        <small>An open-source portfolio template used by 40+ developers.</small>
+      </span>
+      <span class="project-tags">HTML · CSS</span>
+    </a>
+
+    <!-- PROJECT -->
+    <a class="project-row" href="#" target="_blank" rel="noopener">
+      <span class="project-num">04</span>
+      <span class="project-title">Local Market — E-commerce UI
+        <small>A storefront concept for small local sellers, built mobile-first.</small>
+      </span>
+      <span class="project-tags">Next.js · Tailwind</span>
+    </a>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="section-num">03</span>
+    </div>
+    <ul class="skills-list">
+      <li>HTML, CSS, JavaScript</li>
+      <li>React & Next.js</li>
+      <li>Responsive / mobile-first design</li>
+      <li>Git & GitHub workflows</li>
+      <li>REST APIs & JSON</li>
+      <li>Figma → code handoff</li>
+      <li>Basic Node.js & Express</li>
+      <li>Accessibility fundamentals</li>
+    </ul>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="wrap contact">
+    <div class="section-head">
+      <h2>Let's work together.</h2>
+      <span class="section-num">04</span>
+    </div>
+    <div class="contact-row">
+      <a class="contact-email" href="mailto:youremail@example.com">youremail@example.com</a>
+      <ul class="social-list">
+        <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://twitter.com/yourusername" target="_blank" rel="noopener">Twitter</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  © 2026 Your Name. Built with plain HTML & CSS.
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
